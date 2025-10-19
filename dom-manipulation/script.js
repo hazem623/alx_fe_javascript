@@ -121,12 +121,12 @@ async function syncQuotes(manual = false) {
         }
     }
     if (newFromServer > 0) {
-        message += `${newFromServer} new quotes from server.`;
+        message += `${newFromServer} new quotes from server. `;
     }
     if (message) {
         showNotification(message);
     } else if (manual) {
-        showNotification('Data is up to date.');
+        showNotification('Quotes synced with server!');
     }
 }
 

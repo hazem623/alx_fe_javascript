@@ -17,37 +17,16 @@ function saveQuotes() {
     localStorage.setItem('quotes', JSON.stringify(quotes));
 }
 
-// Display a random quote using createElement and appendChild
+// Display a random quote using innerHTML
 function showRandomQuote() {
     const quoteDisplay = document.getElementById('quoteDisplay');
-    // Clear previous content
-    while (quoteDisplay.firstChild) {
-        quoteDisplay.removeChild(quoteDisplay.firstChild);
-    }
-
     if (quotes.length === 0) {
-        const noQuoteText = document.createElement('p');
-        noQuoteText.textContent = 'No quotes available.';
-        quoteDisplay.appendChild(noQuoteText);
+        quoteDisplay.innerHTML = 'No quotes available.';
         return;
     }
-
     const randomIndex = Math.floor(Math.random() * quotes.length);
     const quote = quotes[randomIndex];
-
-    // Create elements for quote text and category
-    const quoteText = document.createElement('strong');
-    quoteText.textContent = quote.text;
-
-    const lineBreak = document.createElement('br');
-
-    const categoryText = document.createElement('em');
-    categoryText.textContent = `Category: ${quote.category}`;
-
-    // Append elements to quoteDisplay
-    quoteDisplay.appendChild(quoteText);
-    quoteDisplay.appendChild(lineBreak);
-    quoteDisplay.appendChild(categoryText);
+    quoteDisplay.innerHTML = `<strong>${quote.text}</strong><br><em>Category: ${quote.category}</em>`;
 }
 
 // Create the form for adding new quotes dynamically using createElement and appendChild
@@ -92,7 +71,7 @@ function addQuote() {
         saveQuotes();
         document.getElementById('newQuoteText').value = '';
         document.getElementById('newQuoteCategory').value = '';
-        showRandomQuote(); // Update the DOM with a random quote using createElement and appendChild
+        showRandomQuote(); // Update the DOM with a random quote
         alert('Quote added successfully!');
     } else {
         alert('Please enter both a quote and a category.');

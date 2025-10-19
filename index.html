@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Quote Generator</title>
-  </head>
-  <body>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        #quoteDisplay {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input, select, button {
+            margin: 10px;
+            padding: 8px;
+            font-size: 16px;
+        }
+        button {
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
     <h1>Dynamic Quote Generator</h1>
-
-    <!-- مكان عرض الاقتباسات -->
-    <div id="quoteDisplay"></div>
-
-    <!-- زرار لعرض اقتباس جديد -->
+    <div id="quoteDisplay">Click "Show New Quote" to display a quote!</div>
     <button id="newQuote">Show New Quote</button>
-
-    <!-- فورم لإضافة اقتباسات جديدة -->
     <div>
-      <input
-        id="newQuoteText"
-        type="text"
-        placeholder="Enter a new quote"
-      />
-      <input
-        id="newQuoteCategory"
-        type="text"
-        placeholder="Enter quote category"
-      />
-      <button id="addQuoteBtn">Add Quote</button>
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button onclick="addQuote()">Add Quote</button>
     </div>
-
+    <div>
+        <select id="categoryFilter">
+            <option value="all">All Categories</option>
+        </select>
+        <button onclick="filterQuotes()">Filter Quotes</button>
+    </div>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

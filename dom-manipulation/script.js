@@ -30,7 +30,7 @@ function showNotification(message) {
 }
 
 // Fetch quotes from server
-async function fetchServerQuotes() {
+async function fetchQuotesFromServer() {
     try {
         const response = await fetch(serverUrl);
         const serverData = await response.json();
@@ -62,9 +62,9 @@ async function postQuoteToServer(quote) {
     }
 }
 
-// Sync local with server
-async function syncWithServer(manual = false) {
-    const serverQuotes = await fetchServerQuotes();
+// Sync quotes with server
+async function syncQuotes(manual = false) {
+    const serverQuotes = await fetchQuotesFromServer();
     let conflicts = [];
     let newFromServer = 0;
 
@@ -260,7 +260,7 @@ function importFromJsonFile(event) {
 document.getElementById('newQuote').addEventListener('click', filterQuotes);
 document.getElementById('exportQuotes').addEventListener('click', exportToJsonFile);
 document.getElementById('importFile').addEventListener('change', importFromJsonFile);
-document.getElementById('syncButton').addEventListener('click', () => syncWithServer(true));
+document.getElementById('syncButton').addEventListener('click', () => syncQuotes(true));
 
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
@@ -274,6 +274,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         filterQuotes();
     }
-    syncWithServer(); // Initial sync
-    setInterval(syncWithServer, 30000); // Periodic sync every 30 seconds
+    syncQuotes(); // Initial sync
+    setInterval(syncQuotes, 30000); // Periodic sync every 30 seconds
 });

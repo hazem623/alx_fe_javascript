@@ -82,27 +82,25 @@ function addQuote() {
 
 // Export quotes to JSON file
 function exportToJsonFile() {
-    const quotesJson = JSON.stringify(quotes, null, 2);
-    const blob = new Blob([quotesJson], { type: 'application/json' });
-    const href = URL.createObjectURL(blob);
+    const dataStr = JSON.stringify(quotes, null, 2);
+    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(dataBlob);
     const link = document.createElement('a');
-    link.href = href;
     link.download = 'quotes.json';
-    document.body.appendChild(link);
+    link.href = url;
     link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(href);
+    URL.revokeObjectURL(url);
 }
 
 // Import quotes from JSON file
 function importFromJsonFile(event) {
     const fileReader = new FileReader();
     fileReader.onload = function(event) {
-        const importedQuotes = JSON.parse(event.target.result);
-        quotes.push(...importedQuotes);
-        saveQuotes();
-        alert('Quotes imported successfully!');
-        displayRandomQuote(); // Update DOM after import
+      const importedQuotes = JSON.parse(event.target.result);
+      quotes.push(...importedQuotes);
+      saveQuotes();
+      alert('Quotes imported successfully!');
+      displayRandomQuote();
     };
     fileReader.readAsText(event.target.files[0]);
 }

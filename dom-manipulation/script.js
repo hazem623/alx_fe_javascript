@@ -29,7 +29,19 @@ function showRandomQuote() {
     quoteDisplay.innerHTML = `<strong>${quote.text}</strong><br><em>Category: ${quote.category}</em>`;
 }
 
-// Add a new quote
+// Create the form for adding new quotes dynamically
+function createAddQuoteForm() {
+    const formContainer = document.getElementById('quoteForm');
+    formContainer.innerHTML = `
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button id="addQuoteBtn">Add Quote</button>
+    `;
+    // Add event listener to the dynamically created Add Quote button
+    document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
+}
+
+// Add a new quote to the quotes array and update the DOM
 function addQuote() {
     const quoteText = document.getElementById('newQuoteText').value.trim();
     const quoteCategory = document.getElementById('newQuoteCategory').value.trim();
@@ -39,7 +51,7 @@ function addQuote() {
         saveQuotes();
         document.getElementById('newQuoteText').value = '';
         document.getElementById('newQuoteCategory').value = '';
-        showRandomQuote(); // Show the newly added quote
+        showRandomQuote(); // Update the DOM with a random quote
         alert('Quote added successfully!');
     } else {
         alert('Please enter both a quote and a category.');
@@ -52,5 +64,6 @@ document.getElementById('newQuote').addEventListener('click', showRandomQuote);
 // Initialize the app
 document.addEventListener('DOMContentLoaded', () => {
     loadQuotes();
-    showRandomQuote();
+    createAddQuoteForm(); // Create the form dynamically
+    showRandomQuote(); // Show an initial random quote
 });

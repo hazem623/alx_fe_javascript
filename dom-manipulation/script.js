@@ -52,7 +52,7 @@ async function postQuoteToServer(quote) {
         const response = await fetch(serverUrl, {
             method: 'POST',
             body: JSON.stringify({ title: quote.category, body: quote.text }),
-            headers: { 'Content-type': 'application/json; charset=UTF-8' },
+            headers: { 'Content-Type': 'application/json; charset=UTF-8' },
         });
         const newServerQuote = await response.json();
         // Update local quote with server ID
